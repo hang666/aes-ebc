@@ -10,10 +10,12 @@ import (
 )
 
 func main() {
+	var origData, key string
 	fmt.Println("Please enter your data:")
-	origData := inputData()
+	Scanf(&origData)
 	fmt.Println("Please enter your key:")
-	key := inputData()
+	Scanf(&key)
+
 
 	// keyByte := []byte(key)
 
@@ -21,6 +23,7 @@ func main() {
 	returnData := de(origData, key)
 	fmt.Println(returnData)
 
+	fmt.Scan()
 }
 
 func en(origDataL string, key string) string{
@@ -91,6 +94,12 @@ func PKCS7Pad(data []byte) []byte {
 func PKCS7UPad(data []byte) []byte {
 	padLength := int(data[len(data)-1])
 	return data[:len(data)-padLength]
+}
+
+func Scanf(a *string) {
+	reader := bufio.NewReader(os.Stdin)
+	data, _, _ := reader.ReadLine()
+	*a = string(data)
 }
 
 func inputData() string {
